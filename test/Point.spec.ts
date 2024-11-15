@@ -3,6 +3,7 @@ import { expect } from "chai";
 import Point from "../src/Point";
 import Envelope from "../src/Envelope";
 import EnvelopeBuilder from "../src/EnvelopeBuilder";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
 
 
 describe("test Point", () => {
@@ -41,6 +42,16 @@ describe("test Point", () => {
         const p = new Point([3.0,4.0]);
         
         expect(p.getType()).to.deep.equal("Point");     
+    });
+
+    it("test accept", () => {
+        const p = new Point([3.0,4.0]);
+        const pvide = new Point();
+        
+        const visitor = new LogGeometryVisitor();
+
+        expect(pvide.accept(visitor)).to.deep.equal("Je suis un Point Vide");
+        expect(p.accept(visitor)).to.deep.equal("Je suis un point dont x=3 et y=4");     
     });
 
     it("test getEnvelope", () => {

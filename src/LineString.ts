@@ -2,6 +2,7 @@ import Geometry from  "./Geometry";
 import Point from "./Point";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
+import LogGeometryVisitor from "./LogGeometryVisitor";
 
 export default class Linestring implements Geometry {
     private points: Array<Point>;
@@ -10,7 +11,9 @@ export default class Linestring implements Geometry {
       this.points = points ;
     }
   
-
+    accept(v:LogGeometryVisitor):string{
+      return v.visitLineString(this);
+    }
 
     getEnvelope(): Envelope {
         let eb = new EnvelopeBuilder();
