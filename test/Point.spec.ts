@@ -4,6 +4,7 @@ import Point from "../src/Point";
 import Envelope from "../src/Envelope";
 import EnvelopeBuilder from "../src/EnvelopeBuilder";
 import LogGeometryVisitor from "../src/LogGeometryVisitor";
+import WktVisitor from "../src/WktVisitor";
 
 
 describe("test Point", () => {
@@ -49,9 +50,13 @@ describe("test Point", () => {
         const pvide = new Point();
         
         const visitor = new LogGeometryVisitor();
-
+        const wktvisitor = new WktVisitor();
+        
         expect(pvide.accept(visitor)).to.deep.equal("Je suis un Point Vide");
-        expect(p.accept(visitor)).to.deep.equal("Je suis un point dont x=3 et y=4");     
+        expect(p.accept(visitor)).to.deep.equal("Je suis un point dont x=3 et y=4");
+        
+        expect(pvide.accept(wktvisitor)).to.deep.equal("Point Empty");
+        expect(p.accept(wktvisitor)).to.deep.equal("Point(3 ,4)");
     });
 
     it("test getEnvelope", () => {

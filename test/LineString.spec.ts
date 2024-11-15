@@ -6,6 +6,7 @@ import Envelope from "../src/Envelope";
 import EnvelopeBuilder from "../src/EnvelopeBuilder";
 import WktWriter from "../src/WktWriter.ts";
 import LogGeometryVisitor from "../src/LogGeometryVisitor";
+import WktVisitor from "../src/WktVisitor";
 
 describe("test LineString", () => {
     
@@ -22,12 +23,16 @@ describe("test LineString", () => {
         const pvide = new Point();
         
         const visitor = new LogGeometryVisitor();
+        const Wktvisitor = new WktVisitor();
         
         const l = new LineString([p,pvide,p])
         const lvide = new LineString();
 
         expect(lvide.accept(visitor)).to.deep.equal("Je suis une Polyligne Vide");
-        expect(l.accept(visitor)).to.deep.equal("Je suis une Polyligne de 3 points");     
+        expect(l.accept(visitor)).to.deep.equal("Je suis une Polyligne de 3 points");
+        
+        expect(lvide.accept(Wktvisitor)).to.deep.equal("LineString Empty");
+        expect(l.accept(Wktvisitor)).to.deep.equal("LineString(3,4 3,4)");
     });
     it("test constructor with coordinates", () => {
         

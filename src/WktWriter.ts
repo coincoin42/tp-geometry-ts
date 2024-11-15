@@ -22,7 +22,7 @@ export default class WktWriter {
         }
 
         if (s ==="LineString"){
-            console.log(s+env);
+            console.log(s+"(" + env.getXmin()+ "," +env.getYmin()+ " "+env.getXmax()+","+env.getYmax()+")");
             return s+ "(" + env.getXmin()+ "," +env.getYmin()+ " "+env.getXmax()+","+env.getYmax()+")"
     
                 }
