@@ -17,8 +17,8 @@ export default class Point extends AbstractGeometry {
     return Number.isNaN(this.x())||Number.isNaN(this.y());
   }
 
-  accept(v:GeometryVisitor):void{
-    v.visitPoint(this);
+  accept<T>(v:GeometryVisitor<T>):T{
+    return v.visitPoint(this);
   }
 
   translate(dx :number, dy :number) :void {

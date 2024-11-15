@@ -4,10 +4,10 @@ import LineString from "./LineString";
 import GeometryCollection from "./GeometryCollection";
 
 
-export default interface GeometryVisitor {
+export default interface GeometryVisitor<T> {
 
-    visitPoint(p:Point):void;
-    visitLineString(l:LineString):void;
-    visitGeometryCollection(g:GeometryCollection):void;
+    visitPoint(p:Point):T;
+    visitLineString(l:LineString):T;
+    visitGeometryCollection(g:GeometryCollection):T;
 }
     

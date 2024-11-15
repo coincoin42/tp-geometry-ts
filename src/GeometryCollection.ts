@@ -48,8 +48,9 @@ export default class GeometryCollection extends AbstractGeometry {
         } 
     }
 
-    accept(v: GeometryVisitor): void {
-        v.visitGeometryCollection(this);
+    accept<T>(v: GeometryVisitor<T>): T {
+        return v.visitGeometryCollection(this);
+        
     }
 
     getNumGeometries(){
