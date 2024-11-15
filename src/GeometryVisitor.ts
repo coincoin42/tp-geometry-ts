@@ -5,7 +5,7 @@ import LineString from "./LineString";
 
 export default interface GeometryVisitor {
 
-    visitPoint(p:Point):string;
-    visitLineString(l:LineString):string;
+    visitPoint(p:Point):void;
+    visitLineString(l:LineString):void;
 }
     

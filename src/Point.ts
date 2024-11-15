@@ -17,8 +17,8 @@ export default class Point extends AbstractGeometry {
     return Number.isNaN(this.x())||Number.isNaN(this.y());
   }
 
-  accept(v:LogGeometryVisitor):string{
-    return v.visitPoint(this);
+  accept(v:LogGeometryVisitor):void{
+    v.visitPoint(this);
   }
   translate(dx :number, dy :number) :void {
     if (!this.isEmpty()){
@@ -27,13 +27,7 @@ export default class Point extends AbstractGeometry {
     }
   }
 
-  getEnvelope(): Envelope {
-    let eb = new EnvelopeBuilder();
-    eb.insert(this.getCoordinate());
-    return eb.build()
-  }
-
-
+  
   clone() : Geometry {
       return new Point([this.x(),this.y()])
   }

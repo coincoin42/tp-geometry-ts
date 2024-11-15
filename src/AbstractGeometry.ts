@@ -11,13 +11,19 @@ import WktVisitor from "./WktVisitor";
 export default abstract class AbstractGeometry implements Geometry {
     asText():string{
         let v = new WktVisitor();
-        return this.accept(v);
-    }
+        this.accept(v);
+        return v.getBuffer();
 
+    }
+    getEnvelope(): Envelope {
+        let v = new EnvelopeBuilder();
+        this.accept(v);
+        return v.build();
+    }
     abstract getType(): string;
-    abstract getEnvelope(): Envelope;
+    
     abstract translate(dx: number, dy: number): void;
     abstract isEmpty(): boolean;
-    abstract accept(v: LogGeometryVisitor): string;
+    abstract accept(v: LogGeometryVisitor): void;
     abstract clone(): Geometry;
 }

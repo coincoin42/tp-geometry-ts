@@ -14,20 +14,11 @@ export default class Linestring extends AbstractGeometry{
       this.points = points ;
     }
   
-    accept(v:LogGeometryVisitor):string{
-      return v.visitLineString(this);
+    accept(v:LogGeometryVisitor):void{
+      v.visitLineString(this);
     }
 
-    getEnvelope(): Envelope {
-        let eb = new EnvelopeBuilder();
-        
-        function inserer(point: Point){
-            eb.insert(point.getCoordinate())
-        }
-        
-        this.points.forEach(inserer);
-        return eb.build()
-    }
+
     getType(): string {
       return "LineString";
     }

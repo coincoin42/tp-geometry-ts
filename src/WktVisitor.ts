@@ -7,38 +7,41 @@ export default class WktVisitor implements GeometryVisitor {
     private buffer:string;
     
     constructor() {
-        this.buffer = "empty"
+        this.buffer = "empty";
     }
-    visitPoint(p: Point): string {
+    visitPoint(p: Point): void {
         
     
     if (p.isEmpty()){
         console.log("Point Empty");
-        return "Point Empty"
+        this.buffer = "Point Empty";
     }
     
     else {
         let env = p.getEnvelope();
-        this.buffer = env.toString();
+        this.buffer = "Point(" + env.getXmin()+ " ," +env.getYmin()+ ")";
         console.log("Point(" + env.getXmin()+ " ," +env.getYmin()+ ")");
-        return "Point(" + env.getXmin()+ " ," +env.getYmin()+ ")";
+        
     }
 
 }
-visitLineString(l: LineString): string {
+visitLineString(l: LineString): void {
     
 
 if (l.isEmpty()){
     console.log("LineString Empty");
-    return "LineString Empty"
+    this.buffer = "LineString Empty";
+    
 }
 
 else{
     let env = l.getEnvelope();
-    this.buffer = env.toString();
+    this.buffer = "LineString(" + env.getXmin()+ "," +env.getYmin()+ " "+env.getXmax()+","+env.getYmax()+")";
     console.log("LineString(" + env.getXmin()+ "," +env.getYmin()+ " "+env.getXmax()+","+env.getYmax()+")");
-    return "LineString(" + env.getXmin()+ "," +env.getYmin()+ " "+env.getXmax()+","+env.getYmax()+")"
 
         }
+}
+getBuffer(): string{
+    return this.buffer;
 }
 }

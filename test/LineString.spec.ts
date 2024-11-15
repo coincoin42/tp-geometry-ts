@@ -28,11 +28,11 @@ describe("test LineString", () => {
         const l = new LineString([p,pvide,p])
         const lvide = new LineString();
 
-        expect(lvide.accept(visitor)).to.deep.equal("Je suis une Polyligne Vide");
-        expect(l.accept(visitor)).to.deep.equal("Je suis une Polyligne de 3 points");
+        expect(lvide.accept(visitor)).to.deep.equal(undefined);
+        expect(l.accept(visitor)).to.deep.equal(undefined);
         
-        expect(lvide.accept(Wktvisitor)).to.deep.equal("LineString Empty");
-        expect(l.accept(Wktvisitor)).to.deep.equal("LineString(3,4 3,4)");
+        expect(lvide.accept(Wktvisitor)).to.deep.equal(undefined);
+        expect(l.accept(Wktvisitor)).to.deep.equal(undefined);
     });
 
     it("test asText", () => {
@@ -113,10 +113,12 @@ describe("test LineString", () => {
         expect(l_copy).to.deep.equal(new LineString([new Point([2.0,8.0]),new Point([1.0,11.0])]));     
     });
 
+    
     it("test getEnvelope", () => {
         const p1 = new Point([3.0,4.0]);
         const p2 = new Point([2.0,7.0]);
         const l = new LineString([p1,p2]);
+        
         
         expect(l.getEnvelope()).to.deep.equal(new Envelope([2.0,4.0],[3.0,7.0]));     
     });
