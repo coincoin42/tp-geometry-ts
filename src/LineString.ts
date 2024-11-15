@@ -14,8 +14,8 @@ export default class Linestring extends AbstractGeometry{
       this.points = points ;
     }
   
-    accept(v:GeometryVisitor):void{
-      v.visitLineString(this);
+    accept<T>(v:GeometryVisitor<T>):T{
+      return v.visitLineString(this);
     }
 
 

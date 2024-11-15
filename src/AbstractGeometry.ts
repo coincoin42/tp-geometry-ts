@@ -24,6 +24,6 @@ export default abstract class AbstractGeometry implements Geometry {
     
     abstract translate(dx: number, dy: number): void;
     abstract isEmpty(): boolean;
-    abstract accept(v: GeometryVisitor): void;
+    abstract accept<T>(v: GeometryVisitor<T>): T;
     abstract clone(): Geometry;
 }

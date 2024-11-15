@@ -2,7 +2,7 @@ import Coordinate from "./Coordinate";
 import Envelope from "./Envelope";
 import Geometry from "./Geometry";
 import Linestring from "./LineString";
-import LogGeometryVisitor from "./LogGeometryVisitor";
+import GeometryVisitor from "./GeometryVisitor";
 import Point from "./Point";
 
 export default class GeometryWithCachedEnvelope implements Geometry  {
@@ -25,8 +25,8 @@ constructor(g: Geometry  = new Point()) {
     return this.original.getType();
   }
 
-  accept(v: LogGeometryVisitor): void {
-      this.original.accept(v);
+  accept<T>(v: GeometryVisitor<T>): T {
+      return this.original.accept(v);
   }
 
   clone(): Geometry {

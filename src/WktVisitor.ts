@@ -5,7 +5,7 @@ import GeometryVisitor from "./GeometryVisitor";
 import GeometryCollection from "./GeometryCollection";
 import Geometry from "./Geometry";
 
-export default class WktVisitor implements GeometryVisitor {
+export default class WktVisitor implements GeometryVisitor<void> {
     private buffer:string;
     
     constructor() {
