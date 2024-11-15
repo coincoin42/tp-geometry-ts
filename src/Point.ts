@@ -2,16 +2,23 @@ import Coordinate from "./Coordinate";
 import Geometry from  "./Geometry";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
+import GeometryVisitor from "./GeometryVisitor";
+import AbstractGeometry from "./AbstractGeometry";
 
-export default class Point implements Geometry {
+export default class Point extends AbstractGeometry {
   private coordinate: Coordinate;
 
   constructor(coordinate: Coordinate  = []) {
+    super();
     this.coordinate = coordinate ;
   }
 
   isEmpty(): boolean {
     return Number.isNaN(this.x())||Number.isNaN(this.y());
+  }
+
+  accept(v:GeometryVisitor):void{
+    v.visitPoint(this);
   }
 
   translate(dx :number, dy :number) :void {
@@ -21,13 +28,7 @@ export default class Point implements Geometry {
     }
   }
 
-  getEnvelope(): Envelope {
-    let eb = new EnvelopeBuilder();
-    eb.insert(this.getCoordinate());
-    return eb.build()
-  }
-
-
+  
   clone() : Geometry {
       return new Point([this.x(),this.y()])
   }

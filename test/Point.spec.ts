@@ -3,6 +3,8 @@ import { expect } from "chai";
 import Point from "../src/Point";
 import Envelope from "../src/Envelope";
 import EnvelopeBuilder from "../src/EnvelopeBuilder";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
+import WktVisitor from "../src/WktVisitor";
 
 
 describe("test Point", () => {
@@ -43,10 +45,33 @@ describe("test Point", () => {
         expect(p.getType()).to.deep.equal("Point");     
     });
 
+    it("test accept", () => {
+        const p = new Point([3.0,4.0]);
+        const pvide = new Point();
+        
+        const visitor = new LogGeometryVisitor();
+        const wktvisitor = new WktVisitor();
+        
+        expect(pvide.accept(visitor)).to.deep.equal(undefined);
+        expect(p.accept(visitor)).to.deep.equal(undefined);
+        
+        expect(pvide.accept(wktvisitor)).to.deep.equal(undefined);
+        expect(p.accept(wktvisitor)).to.deep.equal(undefined);
+    });
+
     it("test getEnvelope", () => {
         const p = new Point([3.0,4.0]);
         
         expect(p.getEnvelope()).to.deep.equal(new Envelope([3.0,4.0],[3.0,4.0]));     
+    });
+
+    it("test asText", () => {
+        const p = new Point([3.0,4.0]);
+        const p_vide = new Point();
+        
+        
+        expect(p.asText()).to.deep.equal("Point(3 ,4)");
+        expect(p_vide.asText()).to.deep.equal("Point Empty");     
     });
 
 });

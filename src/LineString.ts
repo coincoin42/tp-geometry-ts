@@ -2,26 +2,23 @@ import Geometry from  "./Geometry";
 import Point from "./Point";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
+import GeometryVisitor from "./GeometryVisitor";
+import AbstractGeometry from "./AbstractGeometry";
 
-export default class Linestring implements Geometry {
+
+export default class Linestring extends AbstractGeometry{
     private points: Array<Point>;
   
     constructor(points: Array<Point> = []) {
+      super();
       this.points = points ;
     }
   
-
-
-    getEnvelope(): Envelope {
-        let eb = new EnvelopeBuilder();
-        
-        function inserer(point: Point){
-            eb.insert(point.getCoordinate())
-        }
-        
-        this.points.forEach(inserer);
-        return eb.build()
+    accept(v:GeometryVisitor):void{
+      v.visitLineString(this);
     }
+
+
     getType(): string {
       return "LineString";
     }

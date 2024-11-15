@@ -4,6 +4,9 @@ import LineString from "../src/LineString";
 import Point from "../src/Point";
 import Envelope from "../src/Envelope";
 import EnvelopeBuilder from "../src/EnvelopeBuilder";
+import WktWriter from "../src/WktWriter.ts";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
+import WktVisitor from "../src/WktVisitor";
 
 describe("test LineString", () => {
     
@@ -15,6 +18,32 @@ describe("test LineString", () => {
         
     });
 
+    it("test accept", () => {
+        const p = new Point([3.0,4.0]);
+        const pvide = new Point();
+        
+        const visitor = new LogGeometryVisitor();
+        const Wktvisitor = new WktVisitor();
+        
+        const l = new LineString([p,pvide,p])
+        const lvide = new LineString();
+
+        expect(lvide.accept(visitor)).to.deep.equal(undefined);
+        expect(l.accept(visitor)).to.deep.equal(undefined);
+        
+        expect(lvide.accept(Wktvisitor)).to.deep.equal(undefined);
+        expect(l.accept(Wktvisitor)).to.deep.equal(undefined);
+    });
+
+    it("test asText", () => {
+        const p = new Point([3.0,4.0]);
+        const lvide = new LineString();
+        const l = new LineString([p,p]);
+        
+        
+        expect(lvide.asText()).to.deep.equal("LineString Empty");
+        expect(l.asText()).to.deep.equal("LineString(3,4 3,4)");     
+    });
     it("test constructor with coordinates", () => {
         
             const p1 = new Point([3.0, 4.0]);  
@@ -84,10 +113,12 @@ describe("test LineString", () => {
         expect(l_copy).to.deep.equal(new LineString([new Point([2.0,8.0]),new Point([1.0,11.0])]));     
     });
 
+    
     it("test getEnvelope", () => {
         const p1 = new Point([3.0,4.0]);
         const p2 = new Point([2.0,7.0]);
         const l = new LineString([p1,p2]);
+        
         
         expect(l.getEnvelope()).to.deep.equal(new Envelope([2.0,4.0],[3.0,7.0]));     
     });
