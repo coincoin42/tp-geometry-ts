@@ -1,8 +1,8 @@
 import Envelope from "./Envelope";
-import LogGeometryVisitor from "./LogGeometryVisitor";
+import GeometryVisitor from "./LogGeometryVisitor";
 
 export default interface Geometry {
-    accept(v:LogGeometryVisitor):void;
+    accept(v:GeometryVisitor):void;
     getType() : string;
     isEmpty() : boolean;
     translate(dx :number, dy :number) : void;

@@ -4,7 +4,7 @@ import Envelope from "./Envelope";
 import Point from "./Point"
 import LineString from "./LineString"
 import EnvelopeBuilder from "./EnvelopeBuilder";
-import LogGeometryVisitor from "./LogGeometryVisitor";
+import GeometryVisitor from "./GeometryVisitor";
 import WktWriter from "./WktWriter";
 import WktVisitor from "./WktVisitor";
 
@@ -24,6 +24,6 @@ export default abstract class AbstractGeometry implements Geometry {
     
     abstract translate(dx: number, dy: number): void;
     abstract isEmpty(): boolean;
-    abstract accept(v: LogGeometryVisitor): void;
+    abstract accept(v: GeometryVisitor): void;
     abstract clone(): Geometry;
 }

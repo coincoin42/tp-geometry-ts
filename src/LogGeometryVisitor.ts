@@ -2,6 +2,7 @@ import Envelope from "./Envelope";
 import Point from "./Point";
 import LineString from "./LineString";
 import GeometryVisitor from "./GeometryVisitor";
+import GeometryCollection from "./GeometryCollection";
 
 export default class LogGeometryVisitor implements GeometryVisitor {
     constructor() {
@@ -25,7 +26,16 @@ export default class LogGeometryVisitor implements GeometryVisitor {
             
         }
         else {
-            console.log("Je suis une Polyligne de " + l.getNumPoints() + "points");
+            console.log("Je suis une Polyligne de " + l.getNumPoints() + " points");
+            
+        }
+    }
+    visitGeometryCollection(g: GeometryCollection): void {
+        if (g.isEmpty()){
+            console.log("Je suis une GeometryCollection vide")
+        }
+        else {
+            console.log("Je suis une GeometryCollection de " + g.getNumGeometries() + " geometries" )
             
         }
     }

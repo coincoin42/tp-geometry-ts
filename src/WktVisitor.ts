@@ -2,6 +2,8 @@ import Envelope from "./Envelope";
 import Point from "./Point";
 import LineString from "./LineString";
 import GeometryVisitor from "./GeometryVisitor";
+import GeometryCollection from "./GeometryCollection";
+import Geometry from "./Geometry";
 
 export default class WktVisitor implements GeometryVisitor {
     private buffer:string;
@@ -41,7 +43,35 @@ else{
 
         }
 }
+
+
+visitGeometryCollection(g: GeometryCollection): void {
+    let s = "GeometryCollection("
+    function ajout(geom: Geometry){
+        let W = new WktVisitor();
+        geom.accept(W);
+        let wkt = W.getBuffer();
+        s = s + wkt;
+        if (geom != g.getGeometryN(g.getNumGeometries()-1)){
+            s += " ,";
+        }
+    }
+    if (g.isEmpty()){
+        this.buffer =  "GeometryCollection Empty"
+    }
+    
+    
+    else{
+    
+    g.getGeometries().forEach(ajout);
+    s = s + ")"
+    this.buffer = s;
+    }
+    
+}
 getBuffer(): string{
     return this.buffer;
 }
+
+
 }

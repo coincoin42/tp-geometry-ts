@@ -2,7 +2,7 @@ import Coordinate from "./Coordinate";
 import Geometry from  "./Geometry";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
-import LogGeometryVisitor from "./LogGeometryVisitor";
+import GeometryVisitor from "./GeometryVisitor";
 import AbstractGeometry from "./AbstractGeometry";
 
 export default class Point extends AbstractGeometry {
@@ -17,9 +17,10 @@ export default class Point extends AbstractGeometry {
     return Number.isNaN(this.x())||Number.isNaN(this.y());
   }
 
-  accept(v:LogGeometryVisitor):void{
+  accept(v:GeometryVisitor):void{
     v.visitPoint(this);
   }
+
   translate(dx :number, dy :number) :void {
     if (!this.isEmpty()){
     this.coordinate[0] = this.x() + dx;

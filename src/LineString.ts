@@ -2,7 +2,7 @@ import Geometry from  "./Geometry";
 import Point from "./Point";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
-import LogGeometryVisitor from "./LogGeometryVisitor";
+import GeometryVisitor from "./GeometryVisitor";
 import AbstractGeometry from "./AbstractGeometry";
 
 
@@ -14,7 +14,7 @@ export default class Linestring extends AbstractGeometry{
       this.points = points ;
     }
   
-    accept(v:LogGeometryVisitor):void{
+    accept(v:GeometryVisitor):void{
       v.visitLineString(this);
     }
 

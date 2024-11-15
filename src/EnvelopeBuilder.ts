@@ -1,8 +1,10 @@
 import Coordinate from "./Coordinate";
 import Envelope from "./Envelope";
+import GeometryCollection from "./GeometryCollection";
 import GeometryVisitor from "./GeometryVisitor";
 import Linestring from "./LineString";
 import Point from "./Point";
+import Geometry from "./Geometry";
 
 export default class EnvelopeBuilder implements GeometryVisitor  {
     private Xmin:number;
@@ -34,6 +36,18 @@ visitLineString(l: Linestring): void {
         
         l.getPoints().forEach(point => inserer(point, this)); 
     }
+}
+
+visitGeometryCollection(g: GeometryCollection): void {
+    const inserer = (geom: Geometry, builder: EnvelopeBuilder) => {
+        geom.accept(builder);
+    };
+    
+    if (!g.isEmpty()) {
+        
+        g.getGeometries().forEach(point => inserer(point, this)); 
+    }
+    
 }
 
 build(): Envelope {
