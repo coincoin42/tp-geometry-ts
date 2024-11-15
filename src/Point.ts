@@ -3,11 +3,13 @@ import Geometry from  "./Geometry";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
 import LogGeometryVisitor from "./LogGeometryVisitor";
+import AbstractGeometry from "./AbstractGeometry";
 
-export default class Point implements Geometry {
+export default class Point extends AbstractGeometry {
   private coordinate: Coordinate;
 
   constructor(coordinate: Coordinate  = []) {
+    super();
     this.coordinate = coordinate ;
   }
 

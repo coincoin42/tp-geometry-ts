@@ -65,5 +65,14 @@ describe("test Point", () => {
         expect(p.getEnvelope()).to.deep.equal(new Envelope([3.0,4.0],[3.0,4.0]));     
     });
 
+    it("test asText", () => {
+        const p = new Point([3.0,4.0]);
+        const p_vide = new Point();
+        
+        
+        expect(p.asText()).to.deep.equal("Point(3 ,4)");
+        expect(p_vide.asText()).to.deep.equal("Point Empty");     
+    });
+
 });
 

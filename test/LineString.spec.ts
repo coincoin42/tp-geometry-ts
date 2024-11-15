@@ -34,6 +34,16 @@ describe("test LineString", () => {
         expect(lvide.accept(Wktvisitor)).to.deep.equal("LineString Empty");
         expect(l.accept(Wktvisitor)).to.deep.equal("LineString(3,4 3,4)");
     });
+
+    it("test asText", () => {
+        const p = new Point([3.0,4.0]);
+        const lvide = new LineString();
+        const l = new LineString([p,p]);
+        
+        
+        expect(lvide.asText()).to.deep.equal("LineString Empty");
+        expect(l.asText()).to.deep.equal("LineString(3,4 3,4)");     
+    });
     it("test constructor with coordinates", () => {
         
             const p1 = new Point([3.0, 4.0]);  
