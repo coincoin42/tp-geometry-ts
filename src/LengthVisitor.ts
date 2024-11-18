@@ -43,23 +43,26 @@ export default class LengthVisitor implements GeometryVisitor<number> {
         }
     }
     visitGeometryCollection(g: GeometryCollection): number {
-        let s = 0.0;
-        if (g.isEmpty()){
-            console.log("Je suis une GeometryCollection vide")
-            return 0.0;
-        }
-        else {
-            console.log("Je suis une GeometryCollection de " + g.getNumGeometries() + " geometries" )
-            for (const geometry of g.getGeometries()) {
-                if (geometry instanceof LineString) {
-                    s += this.visitLineString(geometry);
-                } else if (geometry instanceof Point) {
-                    console.log("Point détecté, aucune longueur ajoutée.");
+        
+            let s = 0.0;
+        
+            if (g.isEmpty()) {
+                console.log("Je suis une GeometryCollection vide");
+                return 0.0;
+            } else {
+                console.log("Je suis une GeometryCollection de " + g.getNumGeometries() + " géométries");
+                
+                
+                for (const geometry of g.getGeometries()) {
+                    
+                    s += geometry.accept(this);
                 }
             }
+        
+            return s;
         }
+        
     }
 
 
 
-}
