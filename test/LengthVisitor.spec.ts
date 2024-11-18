@@ -26,8 +26,8 @@ describe("test LengthVisitor", () => {
         const g = new GeometryCollection([p1,l]);
         const gvide = new GeometryCollection();
 
-      /*  expect(gvide.accept(visitor)).to.deep.equal(0.0);
-        expect(g.accept(visitor)).to.deep.equal(5.0);*/
+        expect(gvide.accept(visitor)).to.deep.equal(0.0);
+        expect(g.accept(visitor)).to.deep.equal(5.656854249492381);
         
         expect(lvide.accept(visitor)).to.deep.equal(0.0);
         expect(l.accept(visitor)).to.deep.equal(5.656854249492381);
